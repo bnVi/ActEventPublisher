@@ -2,7 +2,7 @@
 
 namespace ActEventPublisher.Publishing
 {
-    public interface IPublisher : IDisposable
+    public interface IPublisher
     {
         void SetEndpoint(string endpoint);
         void PublishLogLineEvent<T>(T content);

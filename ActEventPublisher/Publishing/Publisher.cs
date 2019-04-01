@@ -17,11 +17,6 @@ namespace ActEventPublisher.Publishing
             PublishEvent(_endpoint+"/logline", content);
         }
 
-        public void Dispose()
-        {
-            _client.Dispose();
-        }
-
         private void PublishEvent<T>(string endpoint, T content)
         {
             _client.PostAsJsonAsync(endpoint, content);

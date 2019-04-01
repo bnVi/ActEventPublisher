@@ -4,7 +4,7 @@ namespace ActEventPublisher.Settings
 {
     public class SettingsManager : ISettingsManager
     {
-        private string _configFile;
+        private readonly string _configFile;
 
         public SettingsManager(string configFile)
         {
