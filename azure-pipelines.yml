@@ -20,6 +20,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishBuildArtifacts@1
+- task: CopyFiles@2
   inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
+    contents: $(Build.SourcesDirectory)\ActEventPublisher\bin\Release\* 
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
