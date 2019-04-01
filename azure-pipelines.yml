@@ -20,9 +20,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: GithubRelease@0 
-  displayName: 'Create GitHub Release'      
+- task: PublishPipelineArtifact@0
   inputs:
-    githubConnection: Releases
-    repositoryName: bnVi/ActEventPublisher           
-    assets: $(Build.ArtifactStagingDirectory)/*
+    targetPath: $(Build.ArtifactStagingDirectory)
