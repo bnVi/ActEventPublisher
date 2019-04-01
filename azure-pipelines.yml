@@ -23,6 +23,6 @@ steps:
 - task: GithubRelease@0 
   displayName: 'Create GitHub Release'      
   inputs:
-    githubConnection: Releases
+    githubConnection: bnVi (2)
     repositoryName: bnVi/ActEventPublisher           
     assets: $(Build.ArtifactStagingDirectory)/*
