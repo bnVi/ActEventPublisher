@@ -1,7 +1,8 @@
-﻿using System;
+﻿using ActEventPublisher.UI.EventArgs;
+using System;
 using System.Windows.Forms;
 
-namespace ActEventPublisher.UserControls
+namespace ActEventPublisher.UI.UserControls
 {
     public partial class SettingsUserControl : UserControl
     {
@@ -14,22 +15,11 @@ namespace ActEventPublisher.UserControls
             endpointTextBox.Text = endpoint;
         }
 
-        private void updateEndpointButton_Click(object sender, EventArgs e)
+        private void updateEndpointButton_Click(object sender, System.EventArgs e)
         {
             var endpoint = endpointTextBox.Text;
 
             OnEndpointUpdated?.Invoke(this, new EndpointUpdatedEventArgs(endpoint));
         }
     }
-
-    public class EndpointUpdatedEventArgs : EventArgs
-    {
-        public string Endpoint { get; private set; }
-
-        public EndpointUpdatedEventArgs(string endpoint)
-        {
-            Endpoint = endpoint;
-        }
-    }
-
 }

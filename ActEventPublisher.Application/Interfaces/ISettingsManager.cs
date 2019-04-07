@@ -1,4 +1,4 @@
-﻿namespace ActEventPublisher.Settings
+﻿namespace ActEventPublisher.Application.Interfaces
 {
     public interface ISettingsManager
     {

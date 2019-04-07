@@ -1,4 +1,4 @@
-﻿namespace ActEventPublisher.UserControls
+﻿namespace ActEventPublisher.UI.UserControls
 {
     partial class SettingsUserControl
     {

@@ -1,6 +1,7 @@
-﻿using System.IO;
+﻿using ActEventPublisher.Application.Interfaces;
+using System.IO;
 
-namespace ActEventPublisher.Settings
+namespace ActEventPublisher.Infrastructure
 {
     public class SettingsManager : ISettingsManager
     {
