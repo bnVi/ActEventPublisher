@@ -62,6 +62,8 @@
     <Compile Include="Application\Interfaces\ISettingsManager.cs" />
     <Compile Include="Application\Publishers\NatsPublisher.cs" />
     <Compile Include="Application\Infrastructure\PublisherQueue.cs" />
+    <Compile Include="Domain\Entities\CombatEnd.cs" />
+    <Compile Include="Domain\Entities\CombatStart.cs" />
     <Compile Include="Domain\Entities\LogLine.cs" />
     <Compile Include="Domain\Entities\Settings.cs" />
     <Compile Include="Infrastructure\AssemblyLoader.cs" />
