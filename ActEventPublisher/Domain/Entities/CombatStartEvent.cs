@@ -2,9 +2,8 @@
 
 namespace ActEventPublisher.Domain.Entities
 {
-    public class CombatEnd
+    public class CombatStartEvent : Event
     {
         public string ZoneName { get; set; }
-        public DateTime EndTime { get; set; }
     }
 }

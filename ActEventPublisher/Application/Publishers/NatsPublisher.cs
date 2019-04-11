@@ -41,7 +41,7 @@ namespace ActEventPublisher.Application.Publishers
             _natsConnection.Close();
         }
 
-        private byte[] SerializeToJson(Object obj)
+        private byte[] SerializeToJson<T>(T obj)
         {
             var json = JsonConvert.SerializeObject(obj);
 

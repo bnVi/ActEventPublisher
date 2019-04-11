@@ -2,7 +2,7 @@
 
 namespace ActEventPublisher.Domain.Entities
 {
-    public class LogLine
+    public class LogLineEvent : Event
     {
         public DateTime DetectedTime { get; set; }
         public string DetectedZone { get; set; }
