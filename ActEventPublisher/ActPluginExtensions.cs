@@ -20,9 +20,9 @@ namespace ActEventPublisher
             return $@"{ActGlobals.oFormActMain.AppDataFolder.FullName}\Config\{fileName}";
         }
 
-        public static LogLine ToLogLine(this LogLineEventArgs e)
+        public static LogLineEvent ToLogLineEvent(this LogLineEventArgs e)
         {
-            var logLine = new LogLine()
+            var logLine = new LogLineEvent()
             {
                 DetectedTime = e.detectedTime,
                 DetectedZone = e.detectedZone,
@@ -34,9 +34,9 @@ namespace ActEventPublisher
             return logLine;
         }
 
-        public static CombatStart ToCombatStart(this CombatToggleEventArgs e)
+        public static CombatStartEvent ToCombatStartEvent(this CombatToggleEventArgs e)
         {
-            var combatStart = new CombatStart()
+            var combatStart = new CombatStartEvent()
             {
                 ZoneName = e.encounter.ZoneName,
             };
@@ -44,9 +44,9 @@ namespace ActEventPublisher
             return combatStart;
         }
 
-        public static CombatEnd ToCombatEnd(this CombatToggleEventArgs e)
+        public static CombatEndEvent ToCombatEndEvent(this CombatToggleEventArgs e)
         {
-            var combatEnd = new CombatEnd()
+            var combatEnd = new CombatEndEvent()
             {
                 ZoneName = e.encounter.ZoneName,
                 EndTime = e.encounter.EndTime

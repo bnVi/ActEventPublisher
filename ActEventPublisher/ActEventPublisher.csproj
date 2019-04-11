@@ -62,9 +62,10 @@
     <Compile Include="Application\Interfaces\ISettingsManager.cs" />
     <Compile Include="Application\Publishers\NatsPublisher.cs" />
     <Compile Include="Application\Infrastructure\PublisherQueue.cs" />
-    <Compile Include="Domain\Entities\CombatEnd.cs" />
-    <Compile Include="Domain\Entities\CombatStart.cs" />
-    <Compile Include="Domain\Entities\LogLine.cs" />
+    <Compile Include="Domain\Entities\CombatEndEvent.cs" />
+    <Compile Include="Domain\Entities\CombatStartEvent.cs" />
+    <Compile Include="Domain\Entities\Event.cs" />
+    <Compile Include="Domain\Entities\LogLineEvent.cs" />
     <Compile Include="Domain\Entities\Settings.cs" />
     <Compile Include="Infrastructure\AssemblyLoader.cs" />
     <Compile Include="Infrastructure\SettingsManager.cs" />

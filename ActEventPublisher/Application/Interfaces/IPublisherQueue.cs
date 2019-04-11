@@ -1,9 +1,11 @@
-﻿namespace ActEventPublisher.Application.Interfaces
+﻿using ActEventPublisher.Domain.Entities;
+
+namespace ActEventPublisher.Application.Interfaces
 {
     public interface IPublisherQueue
     {
         void SetPublisherEndpoint(string endpoint);
-        void QueueEvent<T>(T content);
+        void QueueEvent(Event e);
         void Start();
         void Stop();
     }

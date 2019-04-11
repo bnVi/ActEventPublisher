@@ -1,7 +1,6 @@
 ﻿using ActEventPublisher.Application.Interfaces;
-using System;
+using ActEventPublisher.Domain.Entities;
 using System.Collections.Concurrent;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ActEventPublisher.Application.Infrastructure
@@ -9,15 +8,13 @@ namespace ActEventPublisher.Application.Infrastructure
     public class PublisherQueue : IPublisherQueue
     {
         private IPublisher _publisher;
-        private BlockingCollection<object> _queue;
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private BlockingCollection<Event> _eventQueue;
 
         public PublisherQueue(IPublisher publisher)
         {
             _publisher = publisher;
 
-            _queue = new BlockingCollection<object>();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _eventQueue = new BlockingCollection<Event>();
         }
 
         public void SetPublisherEndpoint(string endpoint)
@@ -25,38 +22,27 @@ namespace ActEventPublisher.Application.Infrastructure
             _publisher.SetEndpoint(endpoint);
         }
 
-        public void QueueEvent<T>(T content)
+        public void QueueEvent(Event e)
         {
-            _queue.Add(content);
+            _eventQueue.Add(e);
         }
 
         public void Start()
         {
-            Task.Run(() => Run(_cancellationTokenSource.Token));
+           Task.Run(() => ProcessEvents());
         }
 
         public void Stop()
         {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-
+            _eventQueue.CompleteAdding();
             _publisher.Stop();
         }
 
-        private void Run(CancellationToken cancellationToken)
+        private void ProcessEvents()
         {
-            while (!cancellationToken.IsCancellationRequested)
+            foreach(var e in _eventQueue.GetConsumingEnumerable())
             {
-                try
-                {
-                    var content = _queue.Take(cancellationToken);
-
-                    _publisher.Publish(content);
-                }
-                catch (OperationCanceledException)
-                {
-                    break;
-                }
+                _publisher.Publish(e);
             }
         }
     }

@@ -80,17 +80,17 @@ namespace ActEventPublisher
 
         private void PublishLogLineEvent(bool isImport, LogLineEventArgs e)
         {
-            _publisherQueue.QueueEvent(e.ToLogLine());
+            _publisherQueue.QueueEvent(e.ToLogLineEvent());
         }
 
         private void PublishCombatStartEvent(bool isImport, CombatToggleEventArgs e)
         {
-            _publisherQueue.QueueEvent(e.ToCombatStart());
+            _publisherQueue.QueueEvent(e.ToCombatStartEvent());
         }
 
         private void PublishCombatEndEvent(bool isImport, CombatToggleEventArgs e)
         {
-            _publisherQueue.QueueEvent(e.ToCombatEnd());
+            _publisherQueue.QueueEvent(e.ToCombatEndEvent());
         }
     }
 }
