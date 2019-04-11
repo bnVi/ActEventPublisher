@@ -40,18 +40,32 @@ namespace ActEventPublisher
 
             _screenSpace.Controls.Add(settingsUserControl);
 
-            ActPluginExtensions.AddLogLineEventHandler(PublishLogLineEvent);
+            AddActEventHandlers();
 
             _statusLabel.Text = "Plugin Started.";
         }
 
         public void Stop()
         {
-            ActPluginExtensions.RemoveLogLineEventHandler(PublishLogLineEvent);
+            RemoveActEventHandlers();
 
             _publisherQueue.Stop();
 
             _statusLabel.Text = "Plugin Stopped.";
+        }
+
+        private void AddActEventHandlers()
+        {
+            ActGlobals.oFormActMain.OnLogLineRead += PublishLogLineEvent;
+            ActGlobals.oFormActMain.OnCombatStart += PublishCombatStartEvent;
+            ActGlobals.oFormActMain.OnCombatEnd += PublishCombatEndEvent;
+        }
+
+        private void RemoveActEventHandlers()
+        {
+            ActGlobals.oFormActMain.OnLogLineRead -= PublishLogLineEvent;
+            ActGlobals.oFormActMain.OnCombatStart -= PublishCombatStartEvent;
+            ActGlobals.oFormActMain.OnCombatEnd -= PublishCombatEndEvent;
         }
 
         private void UpdateEndpoint(object sender, EndpointUpdatedEventArgs e)
@@ -67,6 +81,16 @@ namespace ActEventPublisher
         private void PublishLogLineEvent(bool isImport, LogLineEventArgs e)
         {
             _publisherQueue.QueueEvent(e.ToLogLine());
+        }
+
+        private void PublishCombatStartEvent(bool isImport, CombatToggleEventArgs e)
+        {
+            _publisherQueue.QueueEvent(e.ToCombatStart());
+        }
+
+        private void PublishCombatEndEvent(bool isImport, CombatToggleEventArgs e)
+        {
+            _publisherQueue.QueueEvent(e.ToCombatEnd());
         }
     }
 }

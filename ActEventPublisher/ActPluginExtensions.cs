@@ -20,16 +20,6 @@ namespace ActEventPublisher
             return $@"{ActGlobals.oFormActMain.AppDataFolder.FullName}\Config\{fileName}";
         }
 
-        public static void AddLogLineEventHandler(LogLineEventDelegate handler)
-        {
-            ActGlobals.oFormActMain.OnLogLineRead += handler;
-        }
-
-        public static void RemoveLogLineEventHandler(LogLineEventDelegate handler)
-        {
-            ActGlobals.oFormActMain.OnLogLineRead -= handler;
-        }
-
         public static LogLine ToLogLine(this LogLineEventArgs e)
         {
             var logLine = new LogLine()
@@ -42,6 +32,27 @@ namespace ActEventPublisher
             };
 
             return logLine;
+        }
+
+        public static CombatStart ToCombatStart(this CombatToggleEventArgs e)
+        {
+            var combatStart = new CombatStart()
+            {
+                ZoneName = e.encounter.ZoneName,
+            };
+
+            return combatStart;
+        }
+
+        public static CombatEnd ToCombatEnd(this CombatToggleEventArgs e)
+        {
+            var combatEnd = new CombatEnd()
+            {
+                ZoneName = e.encounter.ZoneName,
+                EndTime = e.encounter.EndTime
+            };
+
+            return combatEnd;
         }
     }
 }
